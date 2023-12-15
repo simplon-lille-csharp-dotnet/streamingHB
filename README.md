@@ -113,7 +113,7 @@ SET
 
 ```sql
 DELETE FROM actor
-WHERE id_actor = ;
+WHERE id_actor = 2;
 ```
 
 ### Afficher les 3 derniers acteurs/actrices ajouté(e)s
