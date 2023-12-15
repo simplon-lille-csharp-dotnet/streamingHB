@@ -85,6 +85,7 @@ WHERE
 ### La liste des acteurs/actrices principaux pour un film donné
 
 ```sql
+Select
     actor.first_name_actor,
     actor.last_name_actor,
     perform.role
