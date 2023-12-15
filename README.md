@@ -120,8 +120,26 @@ WHERE id_actor = 5;
 ### Afficher les 3 derniers acteurs/actrices ajouté(e)s
 
 ```sql
-SELECT \*
+SELECT *
 FROM actor
 ORDER BY created_date DESC
 LIMIT 3;
+```
+
+### La liste des films pour un acteur/actrice donné
+
+```sql
+
+SELECT
+    title, duration, release_year
+FROM
+     movie
+JOIN
+     perform ON movie.id_movie = perform.id_movie
+JOIN
+     actor ON perform.id_actor = actor.id_actor
+WHERE
+     actor.first_name_actor = 'James'
+AND
+    actor.last_name_actor = 'Stewartt';
 ```

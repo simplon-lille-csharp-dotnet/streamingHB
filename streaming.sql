@@ -56,11 +56,25 @@ CREATE TABLE perform(
 	role VARCHAR(50),
     is_lead_role BIT NOT NULL,
     id_actor INT NOT NULL,
-    id_movie INT NOT NULL,
-    PRIMARY KEY (id_actor, id_movie),
-    FOREIGN KEY (id_actor) REFERENCES actor(id_actor),
-    FOREIGN KEY (id_movie ) REFERENCES movie(id_movie )
-)
+    id_movie INT NOT NULL
+    );
+    
+ALTER TABLE perform
+ADD PRIMARY KEY (id_actor, id_movie),
+    
+ALTER TABLE perform 
+ADD CONSTRAINT fk_perform_actor
+FOREIGN KEY (id_actor) REFERENCES actor (id_actor)
+ON DELETE CASCADE; 
+
+ALTER TABLE perform 
+ADD CONSTRAINT fk_perform_movie
+FOREIGN KEY (id_movie) REFERENCES movie (id_movie)
+ON DELETE CASCADE;
+
+ALTER TABLE perform 
+ADD CONSTRAINT fk_perform_actor
+FOREIGN KEY (id_actor) REFERENCES actor (id_actor);
 
 --Creation de la table favorite
 
@@ -71,6 +85,22 @@ CREATE TABLE favorite(
     FOREIGN KEY (id_movie) REFERENCES movie(id_movie),
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 );
+
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table user
+ALTER TABLE users
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table movie
+ALTER TABLE movie
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table actor
+ALTER TABLE actor
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table director
+ALTER TABLE director
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
 -- Ajout de données initiales dans la table 'users'
 
@@ -145,18 +175,3 @@ INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("Alex",1,4,
 INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("Miss Giddens",0,4,18);
 INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("San",0,7,10);
 INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("Older Jamal",1,11,2);
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table user
-ALTER TABLE users
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table movie
-ALTER TABLE movie
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table actor
-ALTER TABLE actor
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table director
-ALTER TABLE director
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
