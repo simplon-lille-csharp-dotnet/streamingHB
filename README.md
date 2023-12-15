@@ -57,6 +57,12 @@ Assurez-vous que votre système répond aux exigences minimales avant d'installe
 
 XAMPP est distribué sous la [licence Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
----
+## Liste de Requêtes SQL
 
-Merci d'avoir choisi XAMPP pour votre environnement de développement local ! 🚀✨
+Bienvenue dans la liste de requêtes SQL pour notre base de données. Ces requêtes vous seront utiles pour effectuer diverses opérations sur les données.
+
+## Les titres et dates de sortie des films du plus récent au plus ancien
+
+```sql
+SELECT title, release_year FROM movie ORDER BY release_year DESC;
+```
