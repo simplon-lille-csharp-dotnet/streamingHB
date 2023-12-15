@@ -66,3 +66,18 @@ Bienvenue dans la liste de requêtes SQL pour notre base de données. Ces requê
 ```sql
 SELECT title, release_year FROM movie ORDER BY release_year DESC;
 ```
+
+## Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique (prénom d'abord, puis nom)
+
+```sql
+SELECT
+    first_name_actor,
+    last_name_actor,
+    TIMESTAMPDIFF(YEAR, birthdate_actor, CURDATE()) AS age
+FROM
+    actor
+WHERE
+    TIMESTAMPDIFF(YEAR, birthdate_actor, CURDATE()) > 30
+    ORDER BY first_name_actor,  last_name_actor;
+
+```
