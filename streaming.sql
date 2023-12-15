@@ -145,3 +145,18 @@ INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("Alex",1,4,
 INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("Miss Giddens",0,4,18);
 INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("San",0,7,10);
 INSERT INTO perform (role, is_lead_role, id_actor, id_movie) VALUES ("Older Jamal",1,11,2);
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table user
+ALTER TABLE users
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table movie
+ALTER TABLE movie
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table actor
+ALTER TABLE actor
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+--  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table director
+ALTER TABLE director
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
