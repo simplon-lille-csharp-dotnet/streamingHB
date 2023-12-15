@@ -61,13 +61,13 @@ XAMPP est distribué sous la [licence Apache 2.0](https://www.apache.org/license
 
 Bienvenue dans la liste de requêtes SQL pour notre base de données. Ces requêtes vous seront utiles pour effectuer diverses opérations sur les données.
 
-## Les titres et dates de sortie des films du plus récent au plus ancien
+### Les titres et dates de sortie des films du plus récent au plus ancien
 
 ```sql
 SELECT title, release_year FROM movie ORDER BY release_year DESC;
 ```
 
-## Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique (prénom d'abord, puis nom)
+### Les noms, prénoms et âges des acteurs/actrices de plus de 30 ans dans l'ordre alphabétique (prénom d'abord, puis nom)
 
 ```sql
 SELECT
@@ -80,4 +80,47 @@ WHERE
     TIMESTAMPDIFF(YEAR, birthdate_actor, CURDATE()) > 30
     ORDER BY first_name_actor,  last_name_actor;
 
+```
+
+### La liste des acteurs/actrices principaux pour un film donné
+
+```sql
+    actor.first_name_actor,
+    actor.last_name_actor,
+    perform.role
+FROM
+    actor
+JOIN
+    perform ON actor.id_actor = perform.id_actor
+JOIN
+    movie ON perform.id_movie = movie.id_movie
+WHERE
+    movie.title = 'Eyes Wide Shut' AND
+    perform.is_lead_role = 1;
+```
+
+### Modifier un film
+
+```sql
+UPDATE movie
+SET
+  duration = 194
+  WHERE
+  id_movie = 2;
+```
+
+### Supprimer un acteur/actrice
+
+```sql
+DELETE FROM actor
+WHERE id_actor = ;
+```
+
+### Afficher les 3 derniers acteurs/actrices ajouté(e)s
+
+```sql
+SELECT \*
+FROM actor
+ORDER BY created_date DESC
+LIMIT 3;
 ```
