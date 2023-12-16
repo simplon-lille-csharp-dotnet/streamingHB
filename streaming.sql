@@ -81,9 +81,11 @@ FOREIGN KEY (id_actor) REFERENCES actor (id_actor);
 CREATE TABLE favorite(
 	id_user INT NOT NULL,
 	id_movie INT NOT NULL,
-    PRIMARY KEY (id_user, id_movie),
-    FOREIGN KEY (id_movie) REFERENCES movie(id_movie),
-    FOREIGN KEY (id_user) REFERENCES users(id_user)
+    created_date timestamp default LOCALTIMESTAMP,
+    updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY(id_user, id_movie),
+	FOREIGN KEY(id_user) REFERENCES users(id_user) ON DELETE CASCADE,
+	FOREIGN KEY(id_movie) REFERENCES movie(id_movie) ON DELETE CASCADE
 );
 
 --  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table user
