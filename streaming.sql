@@ -12,6 +12,9 @@ created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated_date  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
 
+ALTER TABLE users
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
 --Creation de la table movie
 
 CREATE TABLE movie(
@@ -22,6 +25,13 @@ release_year INT,
 created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated_date  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
+
+ALTER TABLE movie ADD id_director INT NOT NULL;
+ALTER TABLE movie ADD CONSTRAINT fk_id_director FOREIGN KEY (id_director) REFERENCES director(id_director);
+
+ALTER TABLE movie
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
 
 --Creation de la table actor
 
@@ -34,6 +44,9 @@ CREATE TABLE actor(
 	updated_date  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
 
+ALTER TABLE actor
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
 --Creation de la table director
  
 CREATE TABLE director (
@@ -44,11 +57,9 @@ CREATE TABLE director (
 	updated_date  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
 
---- Modification de la table movie : ajout de la contrainte clé étrangère
---  référencer la colonne id_director de la table director
+ALTER TABLE director
+MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
-ALTER TABLE movie ADD id_director INT NOT NULL;
-ALTER TABLE movie ADD CONSTRAINT fk_id_director FOREIGN KEY (id_director) REFERENCES director(id_director);
 
 --Creation de la table perform
 
@@ -81,6 +92,7 @@ ADD COLUMN created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE perform
 ADD COLUMN updated_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
 --Creation de la table favorite
 
 CREATE TABLE favorite(
@@ -92,22 +104,6 @@ CREATE TABLE favorite(
 	FOREIGN KEY(id_user) REFERENCES users(id_user) ON DELETE CASCADE,
 	FOREIGN KEY(id_movie) REFERENCES movie(id_movie) ON DELETE CASCADE
 );
-
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table user
-ALTER TABLE users
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table movie
-ALTER TABLE movie
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table actor
-ALTER TABLE actor
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-
---  ajouter ON UPDATE CURRENT_TIMESTAMP pour la table director
-ALTER TABLE director
-MODIFY updated_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
 -- Ajout de données initiales dans la table 'users'
 
